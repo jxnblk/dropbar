@@ -4,6 +4,7 @@
   "description": "Simple, accessible React autocomplete built with Downshift",
   "main": "dist/index.js",
   "scripts": {
+    "prepublish": "babel src -d dist",
     "start": "x0 docs",
     "test": "nyc ava"
   },
