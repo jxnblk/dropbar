@@ -1,0 +1,30 @@
+{
+  "name": "dropbar",
+  "version": "1.0.0-0",
+  "description": "Simple, accessible React autocomplete built with Downshift",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "x0 docs",
+    "test": "nyc ava"
+  },
+  "keywords": [],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "dependencies": {
+    "downshift": "^2.0.10",
+    "react": "^16.4.1"
+  },
+  "devDependencies": {
+    "@compositor/x0": "^6.0.0",
+    "ava": "^0.25.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "nyc": "^12.0.2",
+    "react-test-renderer": "^16.4.1",
+    "rebass": "^2.0.0",
+    "refunk": "^3.0.1",
+    "styled-components": "^3.3.3"
+  }
+}
