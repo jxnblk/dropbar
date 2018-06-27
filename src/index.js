@@ -32,29 +32,50 @@ export class Dropbar extends React.Component {
   }
 }
 
-export const Label = props =>
+const passThrough = n => n
+
+export const withDropbar = (Component, map = passThrough) => props =>
   <Context.Consumer
-    children={({
-      getLabelProps
-    }) => (
-      <label
-        {...getLabelProps()}
+    children={state => (
+      <Component
+        {...map({ ...props, ...state })}
         {...props}
       />
     )}
   />
 
-export const Input = props =>
-  <Context.Consumer
-    children={({
-      getInputProps
-    }) => (
-      <input
-        {...getInputProps()}
-        {...props}
-      />
-    )}
-  />
+export const Label = withDropbar('label', ({
+  getLabelProps
+}) => getLabelProps())
+
+export const Input = withDropbar('input', ({
+  getInputProps
+}) => getInputProps())
+
+export const Tag = ({
+  is: Component = 'div',
+  ...props
+}) =>
+  <Component {...props} />
+
+/*
+export const MenuAlt = withDropbar(({
+  isOpen,
+  ...props
+}) => isOpen ? <Tag {...props} /> : false, ({
+  children,
+  match,
+  isOpen,
+  getMenuProps,
+  inputValue
+}) => ({
+  ...getMenuProps(),
+  isOpen,
+  children: React.Children.toArray(children)
+    .filter(el => match(el.props.item, inputValue))
+    .map((el, index) => React.cloneElement(el, { index }))
+}))
+*/
 
 export const Menu = ({
   is: Tag = 'div',
