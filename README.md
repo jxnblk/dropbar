@@ -3,6 +3,8 @@
 
 Simple, accessible React autocomplete components built with [Downshift][]
 
+:warning: This is a beta version and the API is unstable. Use with caution
+
 - Easy to style components
 - Smart defaults on top of [Downshift][]
 - Simplified component API
