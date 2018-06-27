@@ -4,6 +4,10 @@ import Downshift from 'downshift'
 export const Context = React.createContext(null)
 
 export class Dropbar extends React.Component {
+  static defaultProps = {
+    match: () => true
+  }
+
   render () {
     const { children, ...props } = this.props
 
@@ -49,12 +53,12 @@ export const Input = props =>
 
 export const Menu = ({
   is: Tag = 'div',
-  match = () => true,
   children,
   ...props
 }) =>
   <Context.Consumer
     children={({
+      match,
       isOpen,
       getMenuProps,
       inputValue

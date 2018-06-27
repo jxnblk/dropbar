@@ -38,10 +38,11 @@ export default class extends React.Component {
           this.setState({
             value: item.value
           })
-        }}>
+        }}
+        match={(item, value) => item.value.includes(value)}>
         <Label>Choose a fruit</Label>
         <Input />
-        <Menu match={(item, value) => item.value.includes(value)}>
+        <Menu>
           {items.map((item, i) => (
             <Item key={item.value} item={item}>
               {item.value}

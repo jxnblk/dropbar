@@ -9,6 +9,10 @@ import {
   Item,
 } from '../src'
 
+// import { Box } from 'rebass'
+// console.log(Label, Box)
+
+  /*
 const Relative = styled.div([], {
   position: 'relative'
 })
@@ -32,6 +36,7 @@ const MenuItem = styled(Item)([], {
     backgroundColor: '#0cf'
   }
 })
+*/
 
 const App = connect(props => (
   <div>
@@ -39,20 +44,19 @@ const App = connect(props => (
     <pre>{props.value || 'none'}</pre>
     <Dropbar
       itemToString={item => item ? item.value : ''}
+      match={(item, value) => item.value.includes(value)}
       onChange={item => {
         props.update({ value: item.value })
       }}>
-      <Relative>
-        <Label>Fruit</Label>
-        <Input />
-        <Dropdown match={(item, value) => item.value.includes(value)}>
-          {props.items.map(item => (
-            <MenuItem key={item.value} item={item}>
-              {item.value}
-            </MenuItem>
-          ))}
-        </Dropdown>
-      </Relative>
+      <Label>Fruit</Label>
+      <Input />
+      <Menu>
+        {props.items.map(item => (
+          <Item key={item.value} item={item}>
+            {item.value}
+          </Item>
+        ))}
+      </Menu>
     </Dropbar>
   </div>
 ))
