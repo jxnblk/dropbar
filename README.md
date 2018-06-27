@@ -3,7 +3,7 @@
 
 Simple, accessible React autocomplete components built with [Downshift][]
 
-:warning: This is a beta version and the API is unstable. Use with caution
+:warning: **This is a beta version and the API is unstable. Use with caution**
 
 - Easy to style components
 - Smart defaults on top of [Downshift][]
@@ -64,7 +64,7 @@ export default class extends React.Component {
 }
 ```
 
-The `Dropbar` components accepts all props that [Downshift][] accepts, in addition to:
+The `Dropbar` component accepts all props that [Downshift][] accepts, in addition to:
 
 - `match` (function) filter the children of the `Menu` component based on the `item` prop
 
@@ -174,7 +174,7 @@ Accepts all props for the Downshift component, plus
 #### `match`
 
 ```js
-(item, value) => true
+match: (item: any, value: string) => boolean
 ```
 
 The `match` props accepts a function that receives two arguments:
@@ -205,7 +205,7 @@ The Item component passes all props through, but requires an `item` prop for Dow
 
 **Props**
 
-- `item` (any) required for Downshift
+- `item` (any) **required** for Downshift to track values
 - `is` (component or string) changes the underlying component type
 
 MIT License
