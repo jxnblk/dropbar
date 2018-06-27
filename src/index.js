@@ -3,7 +3,7 @@ import Downshift from 'downshift'
 
 export const Context = React.createContext(null)
 
-export class Provider extends React.Component {
+export class Dropbar extends React.Component {
   render () {
     const { children, ...props } = this.props
 
@@ -49,6 +49,7 @@ export const Input = props =>
 
 export const Menu = ({
   is: Tag = 'div',
+  match = () => true,
   children,
   ...props
 }) =>
@@ -61,7 +62,10 @@ export const Menu = ({
       <Tag
         {...getMenuProps()}
         {...props}>
-        {children}
+        {React.Children.toArray(children)
+          .filter(el => match(el.props.item, inputValue))
+          .map((el, index) => React.cloneElement(el, { index }))
+        }
       </Tag>
     ) : false}
   />
