@@ -1,7 +1,14 @@
 
 # Dropbar :bike:
 
-Simple, accessible React autocomplete components built with Downshift
+Simple, accessible React autocomplete components built with [Downshift][]
+
+- Easy to style components
+- Smart defaults on top of [Downshift][]
+- Simplified component API
+- Automatic toggling of the dropdown menu
+- Uses React [context][]
+- Rebass version
 
 ```sh
 npm i dropbar
@@ -54,6 +61,10 @@ export default class extends React.Component {
   }
 }
 ```
+
+The `Dropbar` components accepts all props that [Downshift][] accepts, in addition to:
+
+- `match` (function) filter the children of the `Menu` component based on the `item` prop
 
 ## Styling Components
 
@@ -132,7 +143,73 @@ export default ({
 
 ## Rebass Dropbar
 
+To use a version with default styles from [Rebass][], import `dropbar/rebass`
+and ensure [styled-components][] and [Rebass][] are installed.
+
+```sh
+npm i rebass styled-components
+```
+
+```jsx
+import {
+  Dropbar,
+  Label,
+  Input,
+  Menu,
+  Item
+} from 'dropbar/rebass'
+```
+
+## API
+
+### Dropbar
+
+Root context provider component that wraps the Downshift component.
+Accepts all props for the Downshift component, plus
+
+- `match` (function) filters the direct children of the `Menu` component based on the `item` prop
+
+#### `match`
+
+```js
+(item, value) => true
+```
+
+The `match` props accepts a function that receives two arguments:
+
+- `item` (any) the item prop from a direct child of the `Menu` component
+- `value` (string) the `inputValue` from Downshift
+
+### Label
+
+Renders a `<label>` element with Downshift's `getLabelProps` method automatically added.
+
+### Input
+
+Renders an `<input>` element with Downshift's `getInputProps` method automatically added.
+
+### Menu
+
+Renders an `<div>` element with Downshift's `getMenuProps` method automatically added.
+
+**Props**
+
+- `is` (component or string) changes the underlying component type
+
+### Item
+
+Use the `Item` component as a direct child of the `Menu` component to render options for the autocomplete.
+The Item component passes all props through, but requires an `item` prop for Downshift.
+
+**Props**
+
+- `item` (any) required for Downshift
+- `is` (component or string) changes the underlying component type
+
 MIT License
 
+[Downshift]: https://github.com/paypal/downshift
 [styled-components]: https://github.com/styled-components/styled-components
 [emotion]: https://github.com/emotion-js/emotion
+[Rebass]: https://jxnblk.com/rebass
+[context]: https://reactjs.org/docs/context.html

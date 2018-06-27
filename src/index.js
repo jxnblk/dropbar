@@ -1,9 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 
 export const Context = React.createContext(null)
 
 export class Dropbar extends React.Component {
+  static propTypes = {
+    match: PropTypes.func
+  }
+
   static defaultProps = {
     match: () => true
   }
