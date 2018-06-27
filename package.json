@@ -1,6 +1,6 @@
 {
   "name": "dropbar",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "Simple, accessible React autocomplete built with Downshift",
   "main": "dist/index.js",
   "scripts": {
