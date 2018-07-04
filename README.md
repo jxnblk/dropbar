@@ -197,6 +197,7 @@ Renders an `<div>` element with Downshift's `getMenuProps` method automatically 
 **Props**
 
 - `is` (component or string) changes the underlying component type
+- `open` (boolean) force the Menu to display, otherwise controlled by Downshift
 
 ### Item
 

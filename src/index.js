@@ -34,15 +34,17 @@ export class Dropbar extends React.Component {
 
 const passThrough = n => n
 
-export const withDropbar = (Component, map = passThrough) => props =>
+export const withDropbar = (Component, map = passThrough) => React.forwardRef((props, ref) =>
   <Context.Consumer
     children={state => (
       <Component
-        {...map({ ...props, ...state })}
+        ref={ref}
         {...props}
+        {...map({ ...props, ...state })}
       />
     )}
   />
+)
 
 export const Label = withDropbar('label', ({
   getLabelProps
@@ -52,71 +54,54 @@ export const Input = withDropbar('input', ({
   getInputProps
 }) => getInputProps())
 
-export const Tag = ({
+export const Tag = React.forwardRef(({
   is: Component = 'div',
   ...props
-}) =>
-  <Component {...props} />
+}, ref) =>
+  <Component ref={ref} {...props} />
+)
 
-/*
-export const MenuAlt = withDropbar(({
-  isOpen,
-  ...props
-}) => isOpen ? <Tag {...props} /> : false, ({
-  children,
+const MenuBase = React.forwardRef(({ isOpen, open, ...props }, ref) =>
+  isOpen || open
+  ? <Tag {...props} />
+  : false
+)
+
+const mapMenuProps = ({
   match,
   isOpen,
   getMenuProps,
-  inputValue
+  inputValue,
+  children
 }) => ({
   ...getMenuProps(),
   isOpen,
   children: React.Children.toArray(children)
     .filter(el => match(el.props.item, inputValue))
     .map((el, index) => React.cloneElement(el, { index }))
-}))
-*/
+})
 
-export const Menu = ({
-  is: Tag = 'div',
-  children,
-  ...props
-}) =>
-  <Context.Consumer
-    children={({
-      match,
-      isOpen,
-      getMenuProps,
-      inputValue
-    }) => isOpen ? (
-      <Tag
-        {...getMenuProps()}
-        {...props}>
-        {React.Children.toArray(children)
-          .filter(el => match(el.props.item, inputValue))
-          .map((el, index) => React.cloneElement(el, { index }))
-        }
-      </Tag>
-    ) : false}
-  />
+export const Menu = withDropbar(MenuBase, mapMenuProps)
 
-export const Item = ({
-  is: Tag = 'div',
+export const Item = withDropbar(Tag, ({
   item,
   index,
+  getItemProps,
+  selectedItem,
+  highlightedIndex,
   ...props
-}) =>
-  <Context.Consumer
-    children={({
-      getItemProps,
-      selectedItem,
-      highlightedIndex,
-    }) => (
-      <Tag
-        {...getItemProps({ item, index, ...props })}
-        {...props}
-        data-selected={selectedItem === item ? 'true' : undefined}
-        data-highlighted={highlightedIndex === index ? 'true' : undefined}
-      />
-    )}
-  />
+}) => {
+  const selected = selectedItem === item
+  const highlighted = highlightedIndex === index
+  const className = [
+    props.className,
+    selected ? 'selected' : null,
+    highlighted ? 'highlighted' : null,
+  ].join(' ')
+  return {
+    ...getItemProps({ item, index, }),
+    className,
+    ['data-selected']: selected ? 'true' : undefined,
+    ['data-highlighted']: highlighted ? 'true' : undefined,
+  }
+})
