@@ -1,0 +1,43 @@
+import Component from '@reach/component-component'
+import { Provider } from 'rebass'
+import {
+  Dropbar,
+  Label,
+  Input,
+  Menu,
+  Item
+} from '../src/rebass'
+
+export default Provider
+
+# Dropbar/Rebass
+
+<Component initialState={{
+  items: [
+    {value: 'apple'},
+    {value: 'pear'},
+    {value: 'orange'},
+    {value: 'grape'},
+    {value: 'banana'},
+  ],
+  value: ''
+}}>
+  {({ state, setState }) => (
+    <Dropbar
+      itemToString={item => item ? item.value : ''}
+      match={(item, value) => item.value.includes(value)}
+      onChange={item => {
+        setState({ value: item.value })
+      }}>
+      <Label>Fruit</Label>
+      <Input />
+      <Menu>
+        {state.items.map(item => (
+          <Item key={item.value} item={item}>
+            {item.value}
+          </Item>
+        ))}
+      </Menu>
+    </Dropbar>
+  )}
+</Component>

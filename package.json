@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "babel src -d dist",
-    "start": "x0 docs",
+    "start": "mdx-go docs",
     "test": "nyc ava"
   },
   "keywords": [],
@@ -13,20 +13,20 @@
   "license": "MIT",
   "dependencies": {
     "downshift": "^2.0.10",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1"
+    "prop-types": "^15.6.2"
   },
   "devDependencies": {
-    "@compositor/x0": "^6.0.0",
+    "@reach/component-component": "^0.1.0",
     "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "mdx-go": "^1.0.10",
     "nyc": "^12.0.2",
     "react-test-renderer": "^16.4.1",
+    "react": "^16.4.1",
     "rebass": "^2.0.0",
-    "refunk": "^3.0.1",
     "styled-components": "^3.3.3",
     "us": "^2.0.0"
   }
